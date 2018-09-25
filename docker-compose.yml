@@ -10,5 +10,5 @@ services:
     - 11210:11210
 
   app:
-    build: ./app
+    build: .
     image: rbougrin/InitData:${BUILD_NUMBER}
