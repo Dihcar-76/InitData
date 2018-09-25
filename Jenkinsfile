@@ -24,13 +24,13 @@ pipeline {
 
             }
         }
-        stage('Build application'){
-            steps{
-                //bat 'java -jar target/app-1.0-SNAPSHOT-jar-with-dependencies.jar org.ci.Main'
-                //bat 'docker build . -t rbougrin/initdata:1'
-                //docker.build("rbougrin/initdata:${env.BUILD_NUMBER}")
-            }
-        }
+//        stage('Build application'){
+//            steps{
+//                bat 'java -jar target/app-1.0-SNAPSHOT-jar-with-dependencies.jar org.ci.Main'
+//                bat 'docker build . -t rbougrin/initdata:1'
+//                docker.build("rbougrin/initdata:${env.BUILD_NUMBER}")
+//            }
+//        }
         stage ('Run Application') {
             steps {
                 //bat "DB=`docker inspect --format='{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' db`"
