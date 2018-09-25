@@ -25,7 +25,7 @@ pipeline {
         }
         stage('Run'){
             steps{
-                bat 'java -jar target/app-1.0-SNAPSHOT.jar -classpath org.ci.Main'
+                bat 'java -jar target/app-1.0-SNAPSHOT.jar org.ci.Main'
             }
         }
     }
