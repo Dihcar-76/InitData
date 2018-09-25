@@ -27,7 +27,7 @@ pipeline {
         stage('Build application'){
             steps{
                 //bat 'java -jar target/app-1.0-SNAPSHOT-jar-with-dependencies.jar org.ci.Main'
-                bat 'docker build . -t rbougrin/initdata:1'
+                //bat 'docker build . -t rbougrin/initdata:1'
                 //docker.build("rbougrin/initdata:${env.BUILD_NUMBER}")
             }
         }
