@@ -27,13 +27,13 @@ pipeline {
         stage('Build application'){
             steps{
                 //bat 'java -jar target/app-1.0-SNAPSHOT-jar-with-dependencies.jar org.ci.Main'
-                bat 'docker build -t rbougrin/initData:${BUILD_NUMBER}"'
+                bat 'docker build -t rbougrin/initdata:${BUILD_NUMBER}"'
             }
         }
         stage ('Run Application') {
             steps {
                 bat "DB=`docker inspect --format='{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' db`"
-                bat 'docker run -e DB_URI=%DB% rbougrin/InitData:${BUILD_NUMBER}'
+                bat 'docker run -e DB_URI=%DB% rbougrin/initdata:${BUILD_NUMBER}'
             }
         }
     }
