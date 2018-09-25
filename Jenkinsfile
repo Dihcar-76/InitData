@@ -31,8 +31,10 @@ pipeline {
             }
         }
         stage ('Run Application') {
+            steps {
                 bat "DB=`docker inspect --format='{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' db`"
                 bat 'docker run -e DB_URI=%DB% rbougrin/InitData:${BUILD_NUMBER}'
+            }
         }
     }
 }
