@@ -3,7 +3,7 @@ pipeline {
     stages{
         stage('Build') {
             steps{
-                bat 'mvn clean package -DskipTests'
+                bat 'clean package -DskipTests'
             }
         }
         stage('Start couchbase') {
