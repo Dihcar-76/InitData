@@ -15,13 +15,14 @@ public class Database {
     public static final CouchbaseCluster getCluster() {
         if (null == cluster) {
             System.out.println(System.getenv());
-            String host = "172.17.0.2";//System.getenv("DB_URI");
+            String host = System.getenv("DB_URI");
             if (null == host) {
-                host = "localhost";
+                host = "localhost:8091";
                 System.out.println("Invalid host, setting to " + host);
             }
             System.out.println("Using host: " + host);
             cluster = CouchbaseCluster.create(host);
+            cluster.authenticate("Administrator", "Administrator");
         }
         return cluster;
     }
