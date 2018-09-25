@@ -18,12 +18,12 @@ pipeline {
                 bat 'mvn clean package -DskipTests'
             }
         }
-        stage('Start couchbase') {
-            steps{
-                bat 'docker run -d --name db -p 8091-8094:8091-8094 -p 11210-11211:11210-11211 couchbase'
-
-            }
-        }
+//        stage('Start couchbase') {
+//            steps{
+//                bat 'docker run -d --name db -p 8091-8094:8091-8094 -p 11210-11211:11210-11211 couchbase'
+//
+//            }
+//        }
 //        stage('Build application'){
 //            steps{
 //                bat 'java -jar target/app-1.0-SNAPSHOT-jar-with-dependencies.jar org.ci.Main'
