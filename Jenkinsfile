@@ -34,7 +34,7 @@ pipeline {
         stage ('Run Application') {
             steps {
                 //bat "DB=`docker inspect --format='{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' db`"
-                bat 'docker run rbougrin/initdata:1'
+                bat 'docker-compose up --build app'
             }
         }
     }
