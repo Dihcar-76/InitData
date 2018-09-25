@@ -21,14 +21,18 @@ pipeline {
         stage('Start couchbase') {
             steps{
                 bat 'docker run -d --name db -p 8091-8094:8091-8094 -p 11210-11211:11210-11211 couchbase'
+
             }
         }
-        stage('Run'){
+        stage('Build application'){
             steps{
-                bat "SET DB=`docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' db`"
-                bat "ENV DB_URI=$DB"
-                bat 'java -jar target/app-1.0-SNAPSHOT-jar-with-dependencies.jar org.ci.Main'
+                //bat 'java -jar target/app-1.0-SNAPSHOT-jar-with-dependencies.jar org.ci.Main'
+                bat 'docker.build("rbougrin/InitData:${BUILD_NUMBER}")'
             }
+        }
+        stage ('Run Application') {
+                bat "DB=`docker inspect --format='{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' db`"
+                bat 'docker run -e DB_URI=%DB% rbougrin/InitData:${BUILD_NUMBER}'
         }
     }
 }

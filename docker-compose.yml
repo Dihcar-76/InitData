@@ -11,4 +11,7 @@ services:
 
   app:
     build: .
+    image: rbougrin/docker-jenkins-app
+
+  app2:
     image: rbougrin/InitData:${BUILD_NUMBER}
