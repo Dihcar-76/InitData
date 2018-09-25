@@ -15,9 +15,9 @@ public class Database {
     public static final CouchbaseCluster getCluster() {
         if (null == cluster) {
             System.out.println(System.getenv());
-            String host = System.getenv("DB_URI");
+            String host = "172.17.0.2";//System.getenv("DB_URI");
             if (null == host) {
-                host = "172.17.0.2";
+                host = "localhost";
                 System.out.println("Invalid host, setting to " + host);
             }
             System.out.println("Using host: " + host);
