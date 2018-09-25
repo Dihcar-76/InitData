@@ -17,7 +17,7 @@ public class Database {
             System.out.println(System.getenv());
             String host = System.getenv("DB_URI");
             if (null == host) {
-                host = "localhost";
+                host = "172.17.0.2";
                 System.out.println("Invalid host, setting to " + host);
             }
             System.out.println("Using host: " + host);
