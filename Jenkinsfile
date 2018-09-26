@@ -19,14 +19,20 @@ pipeline {
             }
         }
         stage('Start couchbase') {
-            steps{
+            steps {
                 bat 'docker-compose up -d db'
             }
-            steps{
+        }
+
+        stage('Init cluster') {
+            steps {
                 bat 'docker exec db couchbase-cli cluster-init -c 127.0.0.1 --cluster-username Administrator  --cluster-password Administrator --services data, index, query, fts --cluster-ramsize 1024'
             }
+        }
+
+        stage('Create bucket') {
             steps{
-                bat 'couchbase-cli bucket-create -c 127.0.0.1:8091 --username Administrator --password Administrator --bucket testbucket --bucket-type couchbase --bucket-ramsize 1024 --enable-flush 1'
+                bat 'couchbase-cli bucket-create -c 127.0.0.1:8091 --username Administrator --password Administrator --bucket books --bucket-type couchbase --bucket-ramsize 1024 --enable-flush 1'
             }
         }
 
