@@ -26,7 +26,7 @@ pipeline {
 
         stage('Init cluster') {
             steps {
-                bat 'docker exec db couchbase-cli cluster-init -c 127.0.0.1 --cluster-username Administrator  --cluster-password Administrator --services data,index,query,fts --cluster-ramsize 1024'
+                bat 'docker exec db couchbase-cli cluster-init -c 127.0.0.1 --cluster-username Administrator  --cluster-password Administrator --services data,index,query --cluster-ramsize 1024'
             }
         }
 
