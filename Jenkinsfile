@@ -5,14 +5,14 @@ pipeline {
         jdk 'jdk8'
     }
     stages{
-        stage ('Initialize') {
-            steps {
-                bat '''
-                    echo "PATH = %PATH%"
-                    echo "M2_HOME = %M2_HOME%"
-                '''
-            }
-        }
+//        stage ('Initialize') {
+//            steps {
+//                bat '''
+//                    echo "PATH = %PATH%"
+//                    echo "M2_HOME = %M2_HOME%"
+//                '''
+//            }
+//        }
         stage('Build') {
             steps{
                 bat 'mvn clean package -DskipTests'
@@ -21,27 +21,20 @@ pipeline {
         stage('Start couchbase') {
             steps{
                 bat 'docker-compose up -d db'
+            }
+            steps{
                 bat 'docker exec db couchbase-cli cluster-init -c 127.0.0.1 --cluster-username Administrator  --cluster-password Administrator --services data, index, query, fts --cluster-ramsize 1024'
             }
+            steps{
+                bat 'couchbase-cli bucket-create -c 127.0.0.1:8091 --username Administrator --password Administrator --bucket testbucket --bucket-type couchbase --bucket-ramsize 1024 --enable-flush 1'
+            }
         }
-//        stage('Build application'){
-//            steps{
-//                bat 'java -jar target/app-1.0-SNAPSHOT-jar-with-dependencies.jar org.ci.Main'
-//                bat 'docker build . -t rbougrin/initdata:1'
-//                docker.build("rbougrin/initdata:${env.BUILD_NUMBER}")
-//            }
-//        }
+
         stage ('Run Application') {
             steps {
                 //bat "DB=`docker inspect --format='{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' db`"
                 bat 'docker-compose up -d --build app'
             }
         }
-//        stage ('Run interactive shell') {
-//            steps {
-//                //bat "DB=`docker inspect --format='{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' db`"
-//                bat 'bash -c "clear && docker exec -it db sh"'
-//            }
-//        }
     }
 }
