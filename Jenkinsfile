@@ -20,8 +20,8 @@ pipeline {
         }
         stage('Start couchbase') {
             steps{
-                bat 'docker-compose up --build db'
-
+                bat 'docker-compose up -d db'
+                bat 'docker exec db couchbase-cli cluster-init -c 127.0.0.1 --cluster-username Administrator  --cluster-password Administrator --services data, index, query, fts --cluster-ramsize 1024'
             }
         }
 //        stage('Build application'){
@@ -34,7 +34,7 @@ pipeline {
         stage ('Run Application') {
             steps {
                 //bat "DB=`docker inspect --format='{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' db`"
-                bat 'docker-compose up --build app'
+                bat 'docker-compose up -d --build app'
             }
         }
 //        stage ('Run interactive shell') {
