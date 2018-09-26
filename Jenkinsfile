@@ -32,7 +32,7 @@ pipeline {
 
         stage('Create bucket') {
             steps{
-                bat 'couchbase-cli bucket-create -c 127.0.0.1:8091 --username Administrator --password Administrator --bucket books --bucket-type couchbase --bucket-ramsize 1024 --enable-flush 1'
+                bat 'docker exec db couchbase-cli bucket-create -c 127.0.0.1:8091 --username Administrator --password Administrator --bucket books --bucket-type couchbase --bucket-ramsize 1024 --enable-flush 1'
             }
         }
 
