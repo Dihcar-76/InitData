@@ -11,8 +11,8 @@ services:
     - 8094:8094
     - 11210:11210
     - 11211:11211
-    networks:
-    - dockernet2
+#    networks:
+#    - dockernet2
 
 
   app:
@@ -23,6 +23,6 @@ services:
     environment:
     - DB_URI=couchbase:8091
 
-networks:
-  dockernet2:
-    external: true
+#networks:
+#  dockernet2:
+#    external: true
