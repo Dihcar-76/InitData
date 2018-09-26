@@ -26,13 +26,13 @@ pipeline {
 
         stage('Init cluster') {
             steps {
-                bat 'docker-compose exec -T db couchbase-cli cluster-init -c 10.0.75.1 --cluster-username Administrator  --cluster-password Administrator --services data,index,query --cluster-ramsize 1024'
+                bat 'docker-compose exec -T db couchbase-cli cluster-init -c DB_URI --cluster-username Administrator  --cluster-password Administrator --services data,index,query --cluster-ramsize 1024'
             }
         }
 
         stage('Create bucket') {
             steps{
-                bat 'docker-compose exec -T db couchbase-cli bucket-create -c 10.0.75.1:8091 --username Administrator --password Administrator --bucket books --bucket-type couchbase --bucket-ramsize 1024 --enable-flush 1'
+                bat 'docker-compose exec -T db couchbase-cli bucket-create -c DB_URI:8091 --username Administrator --password Administrator --bucket books --bucket-type couchbase --bucket-ramsize 1024 --enable-flush 1'
             }
         }
 
