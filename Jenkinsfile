@@ -21,7 +21,7 @@ pipeline {
         stage('Start couchbase') {
             steps {
                 bat 'docker-compose up -d db'
-                bat'sleep 15'
+                bat 'docker-compose exec db sleep 15'
             }
         }
 
