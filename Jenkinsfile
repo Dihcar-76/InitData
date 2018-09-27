@@ -39,7 +39,6 @@ pipeline {
 
         stage ('Run Application') {
             steps {
-                //bat "DB=`docker inspect --format='{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' db`"
                 bat 'docker-compose up -d --build app'
             }
         }
