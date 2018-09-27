@@ -26,6 +26,7 @@ pipeline {
 
         stage('Init cluster') {
             steps {
+                bat 'start http://localhost:8091'
                 bat 'docker-compose exec -T db couchbase-cli cluster-init -c localhost --cluster-username Administrator  --cluster-password Administrator --services data,index,query --cluster-ramsize 1024'
             }
         }
